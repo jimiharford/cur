@@ -1,74 +1,637 @@
-XRP/USDT LONG
-Entry: 0.52
-Target: 0.58
-Stop: 0.48
-
-BNB/USDT SHORT
-Entry: 220
-Target: 200
-Stop: 235
-
-DOGE/USDT LONG
-Entry: market
-Target: 0.075
-Stop: 6%
-
-LTC/USDT SHORT
-Entry: 85.50
-Target: 80.00
-Stop: 88.00
-
-BCH/USDT LONG
-Entry: 120.00
-Target: 135.00
-Stop: 115.00
-
-EOS/USDT SHORT
-Entry: now
-Target: 0.65
-Stop: 3.5%
-
-TRX/USDT LONG
-Entry: 0.085
-Target: 0.095
-Stop: 0.080
-
-VET/USDT SHORT
-Entry: 0.025
-Target: 0.022
-Stop: 0.028
-
-FIL/USDT LONG
-Entry: market
-Target: 4.50
-Stop: 4%
-
-ALGO/USDT SHORT
-Entry: 0.15
-Target: 0.13
-Stop: 0.17
-
-NEAR/USDT LONG
+#SOL/USDT 🚀
+Direction: LONG
+Buy Zone: 148.50 - 150.00
+Targets: 🎯 152.50, 155.00, 160.00
+Stoploss 🚫: 145.50
+Leverage: Cross 20x
+🆔 #S001
+%%--SIGNAL_BOUNDARY--%%
+ETH SHORT
+Entry 3550
+Leverage: 50x
+TP1 3510
+TP2 3480
+TP3 3450
+SL 3610
+%%--SIGNAL_BOUNDARY--%%
+⚡️⚡️ #XRP/USDT ⚡️⚡️
+Exchanges: Binance, Bybit
+Signal Type: Regular (Long)
+Enter above: 0.5250
+Take-Profit Targets:
+0.5350
+0.5450
+0.5600
+Stop Target: 0.5180
+%%--SIGNAL_BOUNDARY--%%
+$DOGE LONG NOW Leverage X10
+Targets:
+TARGET 1  : 0.135
+TARGET 2  : 0.140
+TARGET 3  : 0.150
+Stop : Defined Later
+%%--SIGNAL_BOUNDARY--%%
+#ADA/USDT
+Signal Type: (SHORT)
+Leverage: Cross 15X
+Entry Range: 0.4550 - 0.4600
+Take Profit Targets: 
+1) 0.4480 
+2) 0.4420 
+3) 0.4350
+StopLoss : 0.4680
+%%--SIGNAL_BOUNDARY--%%
+PAIR: LINKUSDT
+TYPE: LONG
+LEVERAGE: Cross 20x
+Entry Targets:
+14.80
+14.50 (DCA)
+Take-Profit Targets:
+15.10 - 15.40 - 15.80 - 16.50
+Stoploss: 14.10
+%%--SIGNAL_BOUNDARY--%%
+$AVAX/USDT SHORT SCALP
+Entry if breaks below 25.50
+Leverage: 25X
+TP:
+25.10
+24.80
+24.50
+SL: 25.95 (IF 1H CC above this price)
+%%--SIGNAL_BOUNDARY--%%
+#MATIC Buy Setup
+I recommend using low leverage for this one.
+📈 Entry: CMP (Current Market Price)
+🛑 SL: 0.550
+🎯 Target 1: 0.600
+🎯 Target 2: 0.650
+🎯 Target 3: 0.700
+%%--SIGNAL_BOUNDARY--%%
+💎 BUY #PEPE/USDT at #GATEIO
+📈 SPOT TRADE
+🛒 Entry Zone: 0.00001150 - 0.00001180
+💵 Current ask: 0.00001175
+🎯 Target 1: 0.00001210
+🎯 Target 2: 0.00001250
+🚫 Stop loss: 0.00001120
+%%--SIGNAL_BOUNDARY--%%
+Coin : #FTM/USDT
+LONG
+Leverage : Cross 10x
+Entry 0.6100 - 0.6000
+Stoploss : 0.5850
+Target 1 • 0.6250
+Target 2 • 0.6400
+Target 3 • 0.6600
+%%--SIGNAL_BOUNDARY--%%
+🔴 Short #BNB/USDT
+Entry : 595 - 600
+Targets :
+🎯 585
+🎯 578
+🎯 570
+🛑 Stop : 610
+Leverage : 10x (isolated)
+%%--SIGNAL_BOUNDARY--%%
+#NEAR/USDT        
+Signal Type: (LONG)
+Leverage: Cross 25X
+Entry Range: 5.40 - 5.30 
+Take Profit Targets: 5.50, 5.65, 5.80, 6.00
+StopLoss : 5.15
+%%--SIGNAL_BOUNDARY--%%
+$INJ Buying Setup:
+👉🏻 Entry Zone: 24.50-25.00
+👉🏻 TP: 26.50
+👉🏻 SL: 23.80
+👉🏻 RR: 1:3
+#TraderLife
+%%--SIGNAL_BOUNDARY--%%
+#SIGNAL (LTC/USDT)
+🔑 Open SHORT at price between $75.50 - $76.20 with X20 leverage.
+🍒 Targets:
+1️⃣ Close the order at the price $74.80
+2️⃣ Close the order at the price $74.10
+3️⃣ Close the order at the price $73.00
+❗️ STOP LOSS: $77.00
+%%--SIGNAL_BOUNDARY--%%
+$RUNE LONG NOW Leverage X10 X25
+Target :
+TARGET 1  : 4.80
+TARGET 2  : 5.00
+TARGET 3  : 5.25
+STOP : 4.45
+%%--SIGNAL_BOUNDARY--%%
+#WIF/USDT at (Binance.com)
+Buy around 2.50-2.40
+Selling Targets - 2.60-2.75-2.90-3.10
+Stop Suggested – 2.25
+%%--SIGNAL_BOUNDARY--%%
+$GALA SHORT 20x
+1% Risk
+Entry 0.0450
+Stop 0.0465
+Targets: 0.0440, 0.0430, 0.0415
+%%--SIGNAL_BOUNDARY--%%
+Long some #SHIB now 0.00002550
+You can use max 20x leverage
+🎯 Targets 10% - 20% - 30%
+❌ Stop-loss: -5%
+%%--SIGNAL_BOUNDARY--%%
+⚡️⚡️#ARB/USDT⚡️⚡️
+Exchanges: Binance Futures, ByBit USDT
+Signal Type: Regular (Short)
+Leverage: Cross (15.0x)
+Entry Targets:
+1) 0.980
+2) 1.000
+Take Profit Targets:
+1) 0.965
+2) 0.950
+3) 0.930
+Stop Targets: 1) 1.025
+%%--SIGNAL_BOUNDARY--%%
+Buy
+$MANA/USDT
+Buying range: $0.450-0.460
+Target 1:     $0.475
+Target 2:     $0.490
+Target 3:     $0.510+
+Stop at: $0.435
+NFA, Remember to do your own research
+%%--SIGNAL_BOUNDARY--%%
+#ONDO/USDT 🔼 LONG
+📍 Entry: 1.250
+🎯 Take-Profit Targets:
+✅ TP1: 1.280
+✅ TP2: 1.310
+✅ TP3: 1.350
+❌ Stop-Loss: 1.220
+📈 Leverage: 10x
+%%--SIGNAL_BOUNDARY--%%
+BTC / USDT  (Leverage 25× )
+❇️ SHORT ENTRY : - 68500 - 69000
+🎯 TARGET  :▪️67800▪️67000▪️66000
+🚫 STOP  : 69800
+%%--SIGNAL_BOUNDARY--%%
+Long #FIL at 5.50 small size ↗️
+T/P : 6.00+
+S/L : 5.25
+%%--SIGNAL_BOUNDARY--%%
+PAIR: APEUSDT
+TYPE: SHORT
+LEVERAGE: Cross 10x
+Entry Targets:
+1.20
+1.25 (DCA)
+Take-Profit Targets: 1.15 - 1.10 - 1.05
+Stoploss: 1.30
+%%--SIGNAL_BOUNDARY--%%
+#WLD/USDT Long
+Entry: 2.80_2.70
+Target: 2.90_3.00_3.15
+Stoploss: 2.60
+Leverage: 10x_20x
+%%--SIGNAL_BOUNDARY--%%
+#CRYPTOZONE
+#ICP/USDT at (Coinbase)
+Buy around 8.50-8.20
+Selling Targets - 8.80-9.10-9.50-10.00
+Stop Recommended – 7.90
+%%--SIGNAL_BOUNDARY--%%
+$ATOM LONG
+Leverage: Isolated 10X
+Entry zone: 7.00 - 6.80
+Target 1: 7.20
+Target 2: 7.40
+Target 3: 7.60
+Stoploss: 6.65
+%%--SIGNAL_BOUNDARY--%%
+#RNDR USDT
+Long
+Entry: Current price
+Stop loss: 7.50
+Profit book targets are 👇
+8.00
+8.25
+8.50
+9.00
+Note: Use lev 5x
+%%--SIGNAL_BOUNDARY--%%
+$FET/USDT SHORT
+Entry 1.60
+Stop 1.68
+Targets: 1.55, 1.50, 1.42
+%%--SIGNAL_BOUNDARY--%%
+Coin : #GRT/USDT
+SHORT
+Leverage : Cross 15x
+Entry 0.2250 - 0.2300
+Stoploss : 0.2360
+Target 1 • 0.2200
+Target 2 • 0.2150
+Target 3 • 0.2080
+%%--SIGNAL_BOUNDARY--%%
+Buy #HBAR/USDT #LONG 
+✅ Entry Zone: 0.0780
+☑️ Targets: 1) 0.0800 2) 0.0820 3) 0.0850
+🚫 Stop Loss: 5-10%
+Leverage 20x
+%%--SIGNAL_BOUNDARY--%%
+🔴sell/short signal #OPUSDT
+Entry range: 1.80
+Targets: 1.75_ 1.70_ 1.62
+Stop: 1.86
+Leverage: 5X
+Balance: 3% of capital
+%%--SIGNAL_BOUNDARY--%%
+#VET/USDT 
+Position: LONG 
+Leverage:  Cross25X
+Entries: 0.02600 - 0.02550
+Targets: 🎯 0.02650, 0.02700, 0.02800
+Stop Loss: 0.02480
+%%--SIGNAL_BOUNDARY--%%
+⚡️⚡️ #THETA/USDT ⚡️⚡️
+Exchanges: Bingx
+Signal Type: Regular (Long)
+Leverage: Cross (10х)
+Entry Targets: 0.780
+Take-Profit Targets:
+0.800
+0.820
+0.850
+Stop Targets: 0.755
+%%--SIGNAL_BOUNDARY--%%
+Buy
+$SAND/USDT
+Buying range: $0.330-0.320
+Target 1:     $0.340
+Target 2:     $0.355
+Target 3:     $0.370+
+Stop at: $0.305
+%%--SIGNAL_BOUNDARY--%%
+Long #ETC at market small size ↗️
+T/P : 25.00+
+S/L : 22.80
+%%--SIGNAL_BOUNDARY--%%
+#FLOW/USDT (LONG)
+Entry : 0.650 - 0.640
+Leverage 5x - 10x Cross
+TAKE PROFIT: 0.670, 0.690, 0.720+
+STOP LOSS:   0.625
+%%--SIGNAL_BOUNDARY--%%
+$AAVE SHORT
+Leverage: Isolated 5X
+Entry zone: 92.0 - 94.0
+Target 1: 90.0
+Target 2: 88.0
+Stoploss: 96.5
+%%--SIGNAL_BOUNDARY--%%
+CoinPulse Trade
+Pair: FTM/USDT #SHORT
+Leverage: cross 50x with 1% balance
+Entry : 0.650 - 0.660
+Targets - 0.640 - 0.630 - 0.610
+Stop loss : 0.675
+%%--SIGNAL_BOUNDARY--%%
+#KSM/USDT        
+Signal Type: (SHORT)
+Leverage: Cross 15X
+Entry Range: 25.0 - 25.5
+Take Profit Targets: 
+1) 24.5
+2) 24.0 
+3) 23.2
+StopLoss : 26.2
+%%--SIGNAL_BOUNDARY--%%
+#EGLD/USDT
+BUY :
+1) 29.50 - 50%
+2) 28.80 - 50%
+Take Profit Targets: 
+1)🟩 30.50
+2)🟩 31.50
+3)🟩 33.00
+🟥 SL : 27.90
+📊 LEV : 10X - 20X
+%%--SIGNAL_BOUNDARY--%%
+$AXS Buying Setup:
+👉🏻 Entry: 6.20-6.00
+👉🏻 TP: 6.50, 7.00
+👉🏻 SL: 5.80
+Cheers
+%%--SIGNAL_BOUNDARY--%%
+#XTZ/USDT (LONG)
+ENTRY: 0.800
+TARGETS: 0.820 – 0.840 – 0.870
+STOP LOSS: 0.775
+Leverage: 3-5x
+%%--SIGNAL_BOUNDARY--%%
+💎 Buy #GALA/USDT #LONG 
+✅ Entry Zone: 0.0290
+☑️ Targets:
+1) 0.0295
+2) 0.0300
+3) 0.0310
+🚫 Stop Loss: No SL, will update
+Leverage 10x
+%%--SIGNAL_BOUNDARY--%%
+Long #IOTA now 0.1750
+🎯 Targets 10% - 25%
+❌ Stop-loss: 0.1680
+%%--SIGNAL_BOUNDARY--%%
+PAIR: ZECUSDT
+TYPE: LONG
+LEVERAGE: Cross 10x
+Entry: 21.5
+Take-Profit Targets: 22.0 - 22.5 - 23.5
+Stoploss: 20.9
+%%--SIGNAL_BOUNDARY--%%
+⚡️ #ALGO/USDT ⚡️
+📊Signal Type - Short
+➡️Leverage : 25X
+➡️Entry Target : 0.1400
+📌Take-Profit Targets : 0.1370, 0.1340, 0.1300
+🔴 Stoploss : 0.1435
+%%--SIGNAL_BOUNDARY--%%
+$UNI SHORT 10x
+Entry 10.00
+Stop 10.40
+Targets: 9.80, 9.50, 9.10
+%%--SIGNAL_BOUNDARY--%%
+$COMP LONG
+Entry if breaks above 50.0
+Leverage: 10X
+TP: 51.0, 52.5, 55.0
+SL: 48.5
+%%--SIGNAL_BOUNDARY--%%
+#MKR/USDT (SHORT)
+ENTRY: 2400
+TARGETS: 2350 – 2300 – 2200
+STOP LOSS: 2480
+%%--SIGNAL_BOUNDARY--%%
+Coin #CRV/USDT 
+Position: LONG 
+Leverage:  Cross10X
+Entries: 0.350 - 0.340
+Targets: 🎯 0.360, 0.375, 0.390
+Stop Loss: 0.328
+%%--SIGNAL_BOUNDARY--%%
+🔴 Short #SUSHI/USDT
+Entry : 0.850
+Targets :
+🎯 0.830
+🎯 0.810
+🎯 0.780
+🛑 Stop : 0.875
+Leverage : 10x
+%%--SIGNAL_BOUNDARY--%%
+#YFI/USDT
+BUY :
+1) 7000 - 50%
+2) 6800 - 50%
+Take Profit Targets: 7200, 7500, 8000
+SL : 6600
+LEV : 5X
+%%--SIGNAL_BOUNDARY--%%
+#1INCH/USDT Long
+Entry: 0.400_0.390
+Target: 0.410_0.425_0.440
+Stoploss: 0.378
+%%--SIGNAL_BOUNDARY--%%
+$ZRX BUY
+Entry Zone: 0.360-0.350
+TP: 0.375, 0.390, 0.410
+SL: 0.335
+%%--SIGNAL_BOUNDARY--%%
+Buy #ENJ/USDT #LONG 
+✅ Entry: CMP
+☑️ Target 1) 0.320 ☑️ Target 2) 0.340
+🚫 Stop Loss: 0.285
+%%--SIGNAL_BOUNDARY--%%
+#BAT SHORT
+Entry 0.210
+Leverage: 10x
+TP1 0.205
+TP2 0.200
+SL 0.216
+%%--SIGNAL_BOUNDARY--%%
+#ZIL/USDT        
+Signal Type: (LONG)
+Leverage: Cross 20X
+Entry Range: 0.0180 - 0.0175
+Take Profit Targets: 0.0185, 0.0192, 0.0200
+StopLoss : 0.0170
+%%--SIGNAL_BOUNDARY--%%
+$ANKR LONG
+Leverage: 20X
+Entry zone: 0.0310 - 0.0300
+Target 1: 0.0320
+Target 2: 0.0335
+Stoploss: 0.0294
+%%--SIGNAL_BOUNDARY--%%
+Long #REN at market price
+T/P : 0.0500+
+S/L : 0.0420
+%%--SIGNAL_BOUNDARY--%%
+#STORJ/USDT
+SHORT
+ENTRY: 0.500
+TARGETS: 0.480 – 0.460
+STOP LOSS: 0.525
+%%--SIGNAL_BOUNDARY--%%
+Buy #OMG/USDT #LONG 
+✅ Entry: 0.550
+☑️ Targets: 0.570, 0.600, 0.650
+🚫 Stop Loss: TBD
+%%--SIGNAL_BOUNDARY--%%
+$TRB SHORT
+Entry 60.0
+Stop 63.0
+Targets: 58.0, 55.0
+%%--SIGNAL_BOUNDARY--%%
+Coin #BLZ/USDT 
+Position: LONG 
+Entries: 0.250
+Targets: 🎯 0.260, 0.275, 0.290
+Stop Loss: 0.240
+Leverage: 10X
+%%--SIGNAL_BOUNDARY--%%
+#WAVES/USDT
+BUY : 2.50
+TP: 2.60, 2.75, 3.00
+SL: 2.38
+%%--SIGNAL_BOUNDARY--%%
+Short #LPT now 7.50
+🎯 Targets 5% - 10%
+❌ Stop-loss: 7.80
+%%--SIGNAL_BOUNDARY--%%
+$ALPHA LONG
+Entry if breaks above 0.090
+Leverage: 15X
+TP: 0.093, 0.096
+SL: 0.087
+%%--SIGNAL_BOUNDARY--%%
+Buy #SXP/USDT
+Entry Zone: 0.280-0.270
+Targets: 0.290, 0.305, 0.320
+SL: 0.260
+%%--SIGNAL_BOUNDARY--%%
+#ARPA/USDT (SHORT)
+ENTRY: 0.0500
+TARGETS: 0.0485, 0.0470
+STOP: 0.0515
+%%--SIGNAL_BOUNDARY--%%
+$COTI LONG
+Leverage: 10x
+Entry: 0.0550
+Targets: 0.0570, 0.0590
+Stop: 0.0535
+%%--SIGNAL_BOUNDARY--%%
+#DENT/USDT Buy Setup
+Entry: 0.00100
+SL: 0.00095
+TP: 0.00110, 0.00120
+%%--SIGNAL_BOUNDARY--%%
+#CVC/USDT LONG
+Entry: Current price
+Targets: 0.110, 0.115, 0.122
+Stoploss: 0.098
+%%--SIGNAL_BOUNDARY--%%
+$PERP SHORT
+Entry zone: 0.800 - 0.820
+Target 1: 0.780
+Target 2: 0.750
+Stoploss: 0.845
+%%--SIGNAL_BOUNDARY--%%
+#NKN/USDT        
+Type: (LONG)
+Entry: 0.0950
+TP: 0.100, 0.105
+SL: 0.0920
+%%--SIGNAL_BOUNDARY--%%
+Short #FLM/USDT
+Entry : 0.070
+Targets : 0.068, 0.065
+Stop : 0.0725
+%%--SIGNAL_BOUNDARY--%%
+$UTK LONG
+Leverage: 5x
+Entry: 0.060
+Targets: 0.063 - 0.066
+SL: 0.058
+%%--SIGNAL_BOUNDARY--%%
+#DODO/USDT (LONG)
+Entry : 0.130
+Take Profit: 0.135, 0.142
+Stop Loss: 0.126
+%%--SIGNAL_BOUNDARY--%%
+Coin : #UNFI/USDT
+SHORT
+Leverage : Cross 10x
+Entry 4.00
+Stoploss : 4.15
+Target 1 • 3.90
+Target 2 • 3.75
+%%--SIGNAL_BOUNDARY--%%
+Buy #TFUEL/USDT
+Entry Zone: 0.0350-0.0340
+Targets: 0.0360, 0.0375
+SL: 0.0330
+%%--SIGNAL_BOUNDARY--%%
+$CELR LONG
+Entry now
+TP: 0.0125, 0.0130
+SL: 0.0115
+%%--SIGNAL_BOUNDARY--%%
+#RIF/USDT (SHORT)
+ENTRY: 0.100
+TARGETS: 0.097, 0.094
+STOP: 0.103
+%%--SIGNAL_BOUNDARY--%%
+Long #ORN/USDT
+Entry : 0.50
+Targets : 0.52, 0.55
+Stop : 0.48
+%%--SIGNAL_BOUNDARY--%%
+#DATA/USDT Long
+Entry: 0.0300
+Target: 0.0315, 0.0330
+Stoploss: 0.0290
+%%--SIGNAL_BOUNDARY--%%
+$AKRO SHORT
+Entry 0.0040
+Stop 0.0042
+Targets: 0.0039, 0.0037
+%%--SIGNAL_BOUNDARY--%%
+Buy #CTSI/USDT
+Entry: 0.150
+SL: 0.145
+TP: 0.158, 0.165
+%%--SIGNAL_BOUNDARY--%%
+#TROY/USDT        
+Type: (LONG)
+Entry: 0.00250
+TP: 0.00260, 0.00275
+SL: 0.00240
+%%--SIGNAL_BOUNDARY--%%
+#FOR/USDT SHORT
+Entry: Current price
+Targets: 0.0150, 0.0145
+Stoploss: 0.0162
+%%--SIGNAL_BOUNDARY--%%
+$PNT LONG
+Leverage: 5x
+Entry: 0.120
+Targets: 0.125 - 0.132
+SL: 0.116
+%%--SIGNAL_BOUNDARY--%%
+#WNXM/USDT (LONG)
+Entry : 15.0
+Take Profit: 15.5, 16.2
+Stop Loss: 14.6
+%%--SIGNAL_BOUNDARY--%%
+#MDT/USDT SHORT
+Entry if breaks below 0.050
+TP: 0.048, 0.046
+SL: 0.052
+%%--SIGNAL_BOUNDARY--%%
+Long #OXT/USDT
+Entry : 0.070
+Targets : 0.073, 0.077
+Stop : 0.068
+%%--SIGNAL_BOUNDARY--%%
+#GHST/USDT Long
 Entry: 1.80
-Target: 2.00
-Stop: 1.70
-
-FTM/USDT SHORT
-Entry: 0.35
-Target: 0.30
-Stop: 0.38
-
-AAVE/USDT LONG
-Entry: 85.00
-Target: 95.00
-Stop: 80.00
-
-SUSHI/USDT SHORT
-Entry: now
-Target: 1.20
-Stop: 2%
-
-COMP/USDT LONG
-Entry: 45.50
-Target: 50.00
-Stop: 43.00
+Target: 1.88, 1.95
+Stoploss: 1.74
+%%--SIGNAL_BOUNDARY--%%
+$DF SHORT
+Entry 0.040
+Stop 0.042
+Targets: 0.039, 0.037
+%%--SIGNAL_BOUNDARY--%%
+Buy #FIO/USDT
+Entry: 0.025
+SL: 0.024
+TP: 0.026, 0.028
+%%--SIGNAL_BOUNDARY--%%
+#BEL/USDT        
+Type: (LONG)
+Entry: 0.60
+TP: 0.63, 0.66
+SL: 0.58
+%%--SIGNAL_BOUNDARY--%%
+#WING/USDT SHORT
+Entry: Market
+Targets: 5.80, 5.50
+Stoploss: 6.30
+%%--SIGNAL_BOUNDARY--%%
+$BURGER LONG
+Leverage: 3x
+Entry: 0.40
+Targets: 0.42 - 0.45
+SL: 0.38
+%%--SIGNAL_BOUNDARY--%%
