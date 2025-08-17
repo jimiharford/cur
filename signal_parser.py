@@ -16,7 +16,7 @@ class Signal:
     symbol: str
     direction: str  # LONG or SHORT
     entry: str     # Can be number, 'market', or 'now'
-    target: float
+    targets: List[float]
     stop: float
     entry_numeric: Optional[float] = None
     stop_percentage: Optional[float] = None
@@ -24,60 +24,68 @@ class Signal:
 
 class SignalParser:
     """Parser for trading signals from text files"""
-    
+
     def __init__(self, default_stop_percentage: float = 3.0):
         self.default_stop_percentage = default_stop_percentage
-        
+
     def parse_signal_text(self, text: str) -> Optional[Signal]:
         """Parse a single signal from text"""
         try:
-            # Clean the text
             lines = [line.strip() for line in text.strip().split('\n') if line.strip()]
-            if len(lines) < 4:
+            if len(lines) < 3:  # Must have at least symbol, entry, and one target
                 return None
-                
+
             # First line should contain symbol and direction
             first_line = lines[0]
-            symbol_match = re.match(r'^([A-Z0-9]+/[A-Z0-9]+)\s+(LONG|SHORT)$', first_line)
+            # More robust regex to allow for variations in spacing and text
+            symbol_match = re.search(r'([A-Z0-9/]+)\s+(LONG|SHORT)', first_line, re.IGNORECASE)
             if not symbol_match:
                 return None
-                
-            symbol = symbol_match.group(1)
-            direction = symbol_match.group(2)
-            
-            # Parse entry, target, and stop
+
+            symbol = symbol_match.group(1).upper()
+            direction = symbol_match.group(2).upper()
+
             entry = None
-            target = None
-            stop = None
-            
+            targets = []
+            stop_str = None
+
             for line in lines[1:]:
-                if line.startswith('Entry:'):
-                    entry = line.replace('Entry:', '').strip()
-                elif line.startswith('Target:'):
-                    target_str = line.replace('Target:', '').strip()
+                line_lower = line.lower()
+                if line_lower.startswith('entry'):
+                    entry = line.split(':')[1].strip()
+                elif line_lower.startswith('target'):
+                    target_str = line.split(':')[1].strip()
                     try:
-                        target = float(target_str)
+                        targets.append(float(target_str))
                     except ValueError:
-                        return None
-                elif line.startswith('Stop:'):
-                    stop_str = line.replace('Stop:', '').strip()
-                    stop = self._parse_stop(stop_str)
-                    if stop is None:
-                        return None
+                        # Ignore invalid target lines
+                        pass
+                elif line_lower.startswith('stop'):
+                    stop_str = line.split(':')[1].strip()
             
-            if entry is None or target is None or stop is None:
+            if not entry or not targets:
+                # Not a valid signal if it's missing entry or at least one target
                 return None
-                
+
+            # Handle missing stop loss
+            if stop_str:
+                stop = self._parse_stop(stop_str)
+                if stop is None: # Invalid stop format
+                    return None
+            else:
+                # Default to 3% if stop is missing
+                stop = -self.default_stop_percentage
+
             # Create signal object
             signal = Signal(
                 symbol=symbol,
                 direction=direction,
                 entry=entry,
-                target=target,
+                targets=sorted(targets), # Sort targets for consistency
                 stop=stop,
                 original_text=text
             )
-            
+
             # Set additional fields
             if entry.lower() in ['market', 'now']:
                 signal.entry_numeric = None
@@ -85,16 +93,18 @@ class SignalParser:
                 try:
                     signal.entry_numeric = float(entry)
                 except ValueError:
+                    # If entry is not a valid number, treat as a non-parsable signal
                     return None
-            
+
             # Set stop percentage if it's a percentage stop
             if signal.stop < 0:
                 signal.stop_percentage = abs(signal.stop)
-                    
+
             return signal
-            
+
         except Exception as e:
-            print(f"Error parsing signal: {e}")
+            # Suppress printing errors for non-signal blocks
+            # print(f"Info: Skipping block, could not parse as signal. Text: '{text}'")
             return None
     
     def _parse_stop(self, stop_str: str) -> Optional[float]:
@@ -171,13 +181,14 @@ class SignalParser:
                 result['valid'] = False
                 result['errors'].append("Invalid entry price")
         
-        # Check target vs entry
+        # Check targets vs entry
         if signal.entry_numeric:
-            if signal.direction == 'LONG' and signal.target <= signal.entry_numeric:
-                result['warnings'].append("Target should be above entry for LONG positions")
-            elif signal.direction == 'SHORT' and signal.target >= signal.entry_numeric:
-                result['warnings'].append("Target should be below entry for SHORT positions")
-        
+            for target in signal.targets:
+                if signal.direction == 'LONG' and target <= signal.entry_numeric:
+                    result['warnings'].append(f"Target {target} should be above entry for LONG positions")
+                elif signal.direction == 'SHORT' and target >= signal.entry_numeric:
+                    result['warnings'].append(f"Target {target} should be below entry for SHORT positions")
+
         # Calculate and validate stop
         if signal.stop < 0:  # Percentage stop
             calculated_stop = self.calculate_stop_price(signal, entry_price)
@@ -260,7 +271,7 @@ def main():
         
         print(f"\nSignal {i+1}: {signal.symbol} {signal.direction}")
         print(f"  Entry: {signal.entry}")
-        print(f"  Target: {signal.target}")
+        print(f"  Targets: {signal.targets}")
         print(f"  Stop: {signal.stop}")
         
         if validation['calculated_stop']:
