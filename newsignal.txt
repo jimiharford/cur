@@ -1,0 +1,74 @@
+XRP/USDT LONG
+Entry: 0.52
+Target: 0.58
+Stop: 0.48
+
+BNB/USDT SHORT
+Entry: 220
+Target: 200
+Stop: 235
+
+DOGE/USDT LONG
+Entry: market
+Target: 0.075
+Stop: 6%
+
+LTC/USDT SHORT
+Entry: 85.50
+Target: 80.00
+Stop: 88.00
+
+BCH/USDT LONG
+Entry: 120.00
+Target: 135.00
+Stop: 115.00
+
+EOS/USDT SHORT
+Entry: now
+Target: 0.65
+Stop: 3.5%
+
+TRX/USDT LONG
+Entry: 0.085
+Target: 0.095
+Stop: 0.080
+
+VET/USDT SHORT
+Entry: 0.025
+Target: 0.022
+Stop: 0.028
+
+FIL/USDT LONG
+Entry: market
+Target: 4.50
+Stop: 4%
+
+ALGO/USDT SHORT
+Entry: 0.15
+Target: 0.13
+Stop: 0.17
+
+NEAR/USDT LONG
+Entry: 1.80
+Target: 2.00
+Stop: 1.70
+
+FTM/USDT SHORT
+Entry: 0.35
+Target: 0.30
+Stop: 0.38
+
+AAVE/USDT LONG
+Entry: 85.00
+Target: 95.00
+Stop: 80.00
+
+SUSHI/USDT SHORT
+Entry: now
+Target: 1.20
+Stop: 2%
+
+COMP/USDT LONG
+Entry: 45.50
+Target: 50.00
+Stop: 43.00

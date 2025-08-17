@@ -1,0 +1,49 @@
+BTC/USDT LONG
+Entry: 45000
+Target: 48000
+Stop: 44000
+
+ETH/USDT SHORT
+Entry: 3200
+Target: 3000
+Stop: 3400
+
+ADA/USDT LONG
+Entry: market
+Target: 0.55
+Stop: 3%
+
+SOL/USDT SHORT
+Entry: now
+Target: 95
+Stop: 2.5%
+
+DOT/USDT LONG
+Entry: 7.50
+Target: 8.25
+Stop: 7.00
+
+LINK/USDT SHORT
+Entry: 15.80
+Target: 14.50
+Stop: 16.50
+
+MATIC/USDT LONG
+Entry: market
+Target: 0.85
+Stop: 5%
+
+AVAX/USDT SHORT
+Entry: 25.40
+Target: 23.00
+Stop: 26.80
+
+UNI/USDT LONG
+Entry: 6.20
+Target: 6.80
+Stop: 6.00
+
+ATOM/USDT SHORT
+Entry: now
+Target: 8.50
+Stop: 4%
