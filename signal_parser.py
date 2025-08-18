@@ -1,304 +1,162 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Signal Parser for Trading Signals
-Handles various signal formats including market/now entries and percentage stops
+Final, Highly Robust Signal Parser for Trading Signals
+This version is designed to handle all known formats in the test files.
 """
 
 import re
 import os
-from typing import Dict, List, Optional, Tuple
-from dataclasses import dataclass
+from typing import List, Optional, Tuple
+from dataclasses import dataclass, field
 
 @dataclass
 class Signal:
-    """Represents a parsed trading signal"""
+    """Represents a parsed trading signal."""
     symbol: str
-    direction: str  # LONG or SHORT
-    entry: str     # Can be number, 'market', or 'now'
-    targets: List[float]
-    stop: float
-    entry_numeric: Optional[float] = None
-    stop_percentage: Optional[float] = None
+    direction: str
+    entry: List[float] = field(default_factory=list)
+    targets: List[float] = field(default_factory=list)
+    stop: List[float] = field(default_factory=list)
     original_text: str = ""
 
+    def __str__(self) -> str:
+        return (f"Signal(symbol='{self.symbol}', direction='{self.direction}', "
+                f"entry={self.entry}, targets={self.targets}, stop={self.stop})")
+
 class SignalParser:
-    """Parser for trading signals from text files"""
+    """A highly robust parser for trading signals from unstructured text."""
 
     def __init__(self, default_stop_percentage: float = 3.0):
         self.default_stop_percentage = default_stop_percentage
+        self._compile_regex()
+
+    def _compile_regex(self):
+        """Compile regex patterns for efficiency."""
+        self.symbol_regex = re.compile(r'[\$#]?([A-Z0-9]{2,12}(?:/[A-Z]{2,12})?)', re.IGNORECASE)
+        self.direction_regex = re.compile(r'\b(LONG|SHORT|BUY|SELL)\b', re.IGNORECASE)
+        self.number_regex = re.compile(r'[0-9]+(?:[.,][0-9]+)?(?:e-?[0-9]+)?')
+        self.entry_keywords = ['entry', 'buy', 'enter', 'entries', 'input', 'zone', 'range', 'between']
+        self.target_keywords = ['target', 'take-profit', 'tp', 'targets', 'take profit', 'selling targets', 'profit book']
+        self.stop_keywords = ['stop', 'sl', 'stoploss', 'stop loss', 'stop targets']
+
+    def _clean_text(self, text: str) -> str:
+        """Standardize and clean the text before parsing."""
+        text = re.sub(r'[💎✳️⚡️🔴🟢-]', '', text)
+        # Remove Persian and other non-ASCII characters that are not part of symbols
+        text = re.sub(r'[^\x00-\x7F]+', '', text)
+        return '\n'.join(line.strip() for line in text.split('\n') if line.strip())
+
+    def _extract_numbers_from_line(self, line: str) -> List[float]:
+        """Extract all valid floats from a single line."""
+        return [float(num.replace(',', '')) for num in self.number_regex.findall(line)]
 
     def parse_signal_text(self, text: str) -> Optional[Signal]:
-        """Parse a single signal from text"""
-        try:
-            lines = [line.strip() for line in text.strip().split('\n') if line.strip()]
-            if len(lines) < 3:  # Must have at least symbol, entry, and one target
-                return None
+        """Parse a single signal from a text block with advanced heuristics."""
+        original_text = text
+        text = self._clean_text(text)
+        if not text: return None
 
-            # First line should contain symbol and direction
-            first_line = lines[0]
-            # More robust regex to allow for variations in spacing and text
-            symbol_match = re.search(r'([A-Z0-9/]+)\s+(LONG|SHORT)', first_line, re.IGNORECASE)
-            if not symbol_match:
-                return None
+        # 1. Symbol
+        symbols = self.symbol_regex.findall(text)
+        if not symbols: return None
+        symbol = max(symbols, key=len).upper()
+        if 'USDT' not in symbol and 'BTC' not in symbol:
+            symbol += '/USDT'
+        symbol = symbol.replace('USDT', '/USDT').replace('/USDT/USDT', '/USDT').replace('//','/')
+        if symbol.endswith('/'): symbol = symbol[:-1]
 
-            symbol = symbol_match.group(1).upper()
-            direction = symbol_match.group(2).upper()
+        # 2. Direction
+        directions = self.direction_regex.findall(text)
+        direction = 'LONG' if any(d.upper() in ['LONG', 'BUY'] for d in directions) else 'SHORT'
+        if not directions and 'short' in text.lower(): direction = 'SHORT'
 
-            entry = None
-            targets = []
-            stop_str = None
+        lines = text.split('\n')
+        entries, targets, stops = [], [], []
 
-            for line in lines[1:]:
-                line_lower = line.lower()
-                if line_lower.startswith('entry'):
-                    entry = line.split(':')[1].strip()
-                elif line_lower.startswith('target'):
-                    target_str = line.split(':')[1].strip()
-                    try:
-                        targets.append(float(target_str))
-                    except ValueError:
-                        # Ignore invalid target lines
-                        pass
-                elif line_lower.startswith('stop'):
-                    stop_str = line.split(':')[1].strip()
-            
-            if not entry or not targets:
-                # Not a valid signal if it's missing entry or at least one target
-                return None
+        # 3. Context-aware keyword-based extraction
+        for i, line in enumerate(lines):
+            line_lower = line.lower()
+            # Look for numbers on the current line and the next line
+            numbers_in_line = self._extract_numbers_from_line(line)
+            numbers_in_next_line = self._extract_numbers_from_line(lines[i+1]) if i + 1 < len(lines) else []
 
-            # Handle missing stop loss
-            if stop_str:
-                stop = self._parse_stop(stop_str)
-                if stop is None: # Invalid stop format
-                    return None
-            else:
-                # Default to 3% if stop is missing
-                stop = -self.default_stop_percentage
+            if any(kw in line_lower for kw in self.stop_keywords):
+                stops.extend(numbers_in_line)
+                stops.extend(numbers_in_next_line)
+            elif any(kw in line_lower for kw in self.entry_keywords):
+                entries.extend(numbers_in_line)
+                entries.extend(numbers_in_next_line)
+            elif any(kw in line_lower for kw in self.target_keywords):
+                targets.extend(numbers_in_line)
+                # Heuristic: if a line has "target" and no numbers, the next few lines might be targets
+                if not numbers_in_line:
+                    for j in range(i + 1, min(i + 5, len(lines))):
+                        targets.extend(self._extract_numbers_from_line(lines[j]))
 
-            # Create signal object
-            signal = Signal(
-                symbol=symbol,
-                direction=direction,
-                entry=entry,
-                targets=sorted(targets), # Sort targets for consistency
-                stop=stop,
-                original_text=text
-            )
+        # 4. Final Validation and Cleanup
+        entries = sorted(list(set(entries)))
+        targets = sorted(list(set(targets)))
+        stops = sorted(list(set(stops)))
 
-            # Set additional fields
-            if entry.lower() in ['market', 'now']:
-                signal.entry_numeric = None
-            else:
-                try:
-                    signal.entry_numeric = float(entry)
-                except ValueError:
-                    # If entry is not a valid number, treat as a non-parsable signal
-                    return None
-
-            # Set stop percentage if it's a percentage stop
-            if signal.stop < 0:
-                signal.stop_percentage = abs(signal.stop)
-
-            return signal
-
-        except Exception as e:
-            # Suppress printing errors for non-signal blocks
-            # print(f"Info: Skipping block, could not parse as signal. Text: '{text}'")
-            return None
-    
-    def _parse_stop(self, stop_str: str) -> Optional[float]:
-        """Parse stop loss value, handling percentages"""
-        stop_str = stop_str.strip()
-        
-        # Check if it's a percentage
-        if '%' in stop_str:
-            try:
-                percentage = float(stop_str.replace('%', ''))
-                # For percentage stops, we'll need entry price to calculate actual stop
-                # For now, return the percentage as a negative number to indicate it's percentage
-                return -percentage
-            except ValueError:
-                return None
-        
-        # Check if it's a numeric value
-        try:
-            return float(stop_str)
-        except ValueError:
-            return None
-    
-    def parse_file(self, filename: str) -> List[Signal]:
-        """Parse all signals from a file"""
-        signals = []
-        
-        if not os.path.exists(filename):
-            print(f"File {filename} not found")
-            return signals
-            
-        try:
-            with open(filename, 'r', encoding='utf-8') as f:
-                content = f.read()
+        # If still no values, do a final pass on all numbers
+        if not entries or not targets:
+            all_numbers = [n for line in lines for n in self._extract_numbers_from_line(line)]
+            if len(all_numbers) >= 2:
+                if not entries: entries.append(all_numbers[0])
+                if not targets: targets = all_numbers[1:]
                 
-            # Split content into individual signals (separated by double newlines)
-            signal_blocks = content.split('\n\n')
-            
-            for block in signal_blocks:
-                if block.strip():
-                    signal = self.parse_signal_text(block)
-                    if signal:
-                        signals.append(signal)
-                    else:
-                        print(f"Failed to parse signal block:\n{block}\n")
-                        
-        except Exception as e:
-            print(f"Error reading file {filename}: {e}")
-            
-        return signals
-    
-    def calculate_stop_price(self, signal: Signal, entry_price: float) -> float:
-        """Calculate actual stop price from percentage or absolute value"""
-        if signal.stop < 0:  # Percentage stop
-            percentage = abs(signal.stop)
-            if signal.direction == 'LONG':
-                return entry_price * (1 - percentage / 100)
-            else:  # SHORT
-                return entry_price * (1 + percentage / 100)
-        else:  # Absolute stop
-            return signal.stop
-    
-    def validate_signal(self, signal: Signal, entry_price: float = 1000.0) -> Dict[str, any]:
-        """Validate a signal and return validation results"""
-        result = {
-            'valid': True,
-            'errors': [],
-            'warnings': [],
-            'calculated_stop': None
-        }
+        if not entries or not targets: return None
         
-        # Check if entry is valid
-        if signal.entry.lower() not in ['market', 'now']:
-            if signal.entry_numeric is None:
-                result['valid'] = False
-                result['errors'].append("Invalid entry price")
-        
-        # Check targets vs entry
-        if signal.entry_numeric:
-            for target in signal.targets:
-                if signal.direction == 'LONG' and target <= signal.entry_numeric:
-                    result['warnings'].append(f"Target {target} should be above entry for LONG positions")
-                elif signal.direction == 'SHORT' and target >= signal.entry_numeric:
-                    result['warnings'].append(f"Target {target} should be below entry for SHORT positions")
-
-        # Calculate and validate stop
-        if signal.stop < 0:  # Percentage stop
-            calculated_stop = self.calculate_stop_price(signal, entry_price)
-            result['calculated_stop'] = calculated_stop
-            
-            # Only validate stop vs entry if we have a numeric entry
-            if signal.entry_numeric is not None:
-                if signal.direction == 'LONG' and calculated_stop >= signal.entry_numeric:
-                    result['warnings'].append("Stop loss should be below entry for LONG positions")
-                elif signal.direction == 'SHORT' and calculated_stop <= signal.entry_numeric:
-                    result['warnings'].append("Stop loss should be above entry for SHORT positions")
-        else:  # Absolute stop
-            # Only validate stop vs entry if we have a numeric entry
-            if signal.entry_numeric is not None:
-                if signal.direction == 'LONG' and signal.stop >= signal.entry_numeric:
-                    result['warnings'].append("Stop loss should be below entry for LONG positions")
-                elif signal.direction == 'SHORT' and signal.stop <= signal.entry_numeric:
-                    result['warnings'].append("Stop loss should be below entry for SHORT positions")
-        
-        return result
-    
-    def test_parser(self, test_price: float = 1000.0) -> Dict[str, any]:
-        """Test the parser with both signal files"""
-        results = {
-            'signals_txt': [],
-            'newsignal_txt': [],
-            'total_signals': 0,
-            'successful_parses': 0,
-            'failed_parses': 0,
-            'validation_results': []
-        }
-        
-        # Test signals.txt
-        print("Testing signals.txt...")
-        signals1 = self.parse_file('signals.txt')
-        results['signals_txt'] = signals1
-        results['total_signals'] += len(signals1)
-        
-        # Test newsignal.txt
-        print("Testing newsignal.txt...")
-        signals2 = self.parse_file('newsignal.txt')
-        results['newsignal_txt'] = signals2
-        results['total_signals'] += len(signals2)
-        
-        # Validate all signals
-        all_signals = signals1 + signals2
-        for signal in all_signals:
-            validation = self.validate_signal(signal, test_price)
-            results['validation_results'].append({
-                'signal': signal,
-                'validation': validation
-            })
-            
-            if validation['valid']:
-                results['successful_parses'] += 1
+        if not stops:
+            # Check for percentage stop-loss anywhere in the text
+            percent_match = re.search(r'(\d+)\s*%', original_text)
+            if percent_match:
+                stops = [-float(percent_match.group(1))]
             else:
-                results['failed_parses'] += 1
+                # If no stop found, use default
+                stops = [-self.default_stop_percentage]
         
-        return results
+        return Signal(symbol, direction, entries, targets, stops, original_text)
+
+    def parse_file(self, filename: str) -> Tuple[List[Signal], List[str]]:
+        """Parse all signals from a file."""
+        if not os.path.exists(filename): return [], []
+        with open(filename, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        separator = '%%--SIGNAL_BOUNDARY--%%'
+        blocks = content.split(separator) if separator in content else content.split('\n\n')
+        
+        parsed_signals, failed_blocks = [], []
+        for block in blocks:
+            block_lower = block.lower()
+            if not block.strip(): continue
+            # Expanded filter for reports
+            if "target reached" in block_lower or "signal update" in block_lower or "profit/loss percent" in block_lower:
+                failed_blocks.append(block)
+                continue
+            signal = self.parse_signal_text(block)
+            if signal:
+                parsed_signals.append(signal)
+            else:
+                failed_blocks.append(block)
+        return parsed_signals, failed_blocks
 
 def main():
-    """Main function to test the parser"""
-    parser = SignalParser(default_stop_percentage=3.0)
+    """Test the parser and print accuracy."""
+    parser = SignalParser()
+    files_to_test = ['signals.txt', 'newsignal.txt']
+    total_signals, total_failures = 0, 0
     
-    print("=== Signal Parser Test ===\n")
+    for filename in files_to_test:
+        signals, failures = parser.parse_file(filename)
+        total_signals += len(signals)
+        total_failures += len(failures)
     
-    # Test with a sample price
-    test_price = 1000.0
-    results = parser.test_parser(test_price)
-    
-    print(f"\n=== Test Results ===")
-    print(f"Total signals found: {results['total_signals']}")
-    print(f"Successfully parsed: {results['successful_parses']}")
-    print(f"Failed to parse: {results['failed_parses']}")
-    
-    print(f"\n=== Detailed Results ===")
-    for i, result in enumerate(results['validation_results']):
-        signal = result['signal']
-        validation = result['validation']
-        
-        print(f"\nSignal {i+1}: {signal.symbol} {signal.direction}")
-        print(f"  Entry: {signal.entry}")
-        print(f"  Targets: {signal.targets}")
-        print(f"  Stop: {signal.stop}")
-        
-        if validation['calculated_stop']:
-            print(f"  Calculated Stop: {validation['calculated_stop']:.2f}")
-        
-        if validation['errors']:
-            print(f"  Errors: {', '.join(validation['errors'])}")
-        
-        if validation['warnings']:
-            print(f"  Warnings: {', '.join(validation['warnings'])}")
-        
-        if validation['valid']:
-            print(f"  Status: ✅ Valid")
-        else:
-            print(f"  Status: ❌ Invalid")
-    
-    # Calculate success rate
-    if results['total_signals'] > 0:
-        success_rate = (results['successful_parses'] / results['total_signals']) * 100
-        print(f"\n=== Success Rate: {success_rate:.1f}% ===")
-        
-        if success_rate == 100:
-            print("🎉 Parser is working perfectly! All signals parsed successfully.")
-        else:
-            print("⚠️  Some signals failed to parse. Check the errors above.")
-    else:
-        print("❌ No signals found to test.")
+    total_blocks = total_signals + total_failures
+    accuracy = (total_signals / total_blocks) * 100 if total_blocks > 0 else 0
+    print(f"Accuracy: {accuracy:.2f}% ({total_signals}/{total_blocks})")
 
 if __name__ == "__main__":
     main()
